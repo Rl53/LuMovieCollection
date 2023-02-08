@@ -151,7 +151,6 @@ public class MovieCollection {
     for (int j = 1; j < listToSort.size(); j++) {
       Movie temp = listToSort.get(j);
       String tempTitle = temp.getTitle();
-
       int possibleIndex = j;
       while (possibleIndex > 0 && tempTitle.compareTo(listToSort.get(possibleIndex - 1).getTitle()) < 0) {
         listToSort.set(possibleIndex, listToSort.get(possibleIndex - 1));
