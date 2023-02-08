@@ -233,6 +233,7 @@ public class MovieCollection {
     // arraylist to hold search results
     ArrayList<Movie> results = new ArrayList<Movie>();
 
+
     // search through ALL movies in collection
     for (int i = 0; i < movies.size(); i++) {
       String movieCast = movies.get(i).getCast();
@@ -250,14 +251,15 @@ public class MovieCollection {
 
       // now, display them all to the user
       for (int i = 0; i < results.size(); i++) {
-        String fullName = results.get(i).getCast();
-
+        String temp = results.get(i).getCast();
+        String[] actorList = temp.split("\\|");
+        String fullName = actorList.get(actorList.indexOf(name));
         // this will print index 0 as choice 1 in the results list; better for user!
         int choiceNum = i + 1;
         System.out.println("" + choiceNum + ". " + fullName);
       }
 
-      System.out.println("Which movie would you like to learn more about?");
+      System.out.println("Which would you like to see all movies for?");
       System.out.print("Enter number: ");
       int choice = scanner.nextInt();
       scanner.nextLine();
