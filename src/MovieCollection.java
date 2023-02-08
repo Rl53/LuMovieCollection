@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class MovieCollection {
@@ -252,25 +254,30 @@ public class MovieCollection {
       // now, display them all to the user
       for (int i = 0; i < results.size(); i++) {
         String temp = results.get(i).getCast();
-        String[] actorList = temp.split("\\|");
-        String fullName = actorList.get(actorList.indexOf(name));
+        String[] array = temp.split("\\|");
+        int idx = 0;
+        while (idx < array.length && !array[idx].equals(name)) {
+          idx++;
+        }
+        String fullName = array[idx];
         // this will print index 0 as choice 1 in the results list; better for user!
         int choiceNum = i + 1;
         System.out.println("" + choiceNum + ". " + fullName);
       }
 
-      System.out.println("Which would you like to see all movies for?");
-      System.out.print("Enter number: ");
-      int choice = scanner.nextInt();
-      scanner.nextLine();
-      Movie selectedMovie = results.get(choice - 1);
-      displayMovieInfo(selectedMovie);
-      System.out.println("\n ** Press Enter to Return to Main Menu **");
-      scanner.nextLine();
-    } else {
-      System.out.println("\nNo movies match that keyword term!");
-      System.out.println("** Press Enter to Return to Main Menu **");
-      scanner.nextLine();
+//      System.out.println("Which would you like to see all movies for?");
+//      System.out.print("Enter number: ");
+//      int choice = scanner.nextInt();
+//      scanner.nextLine();
+//      Movie selectedMovie = results.get(choice - 1);
+//      displayMovieInfo(selectedMovie);
+//      System.out.println("\n ** Press Enter to Return to Main Menu **");
+//      scanner.nextLine();
+//    } else {
+//      System.out.println("\nNo movies match that keyword term!");
+//      System.out.println("** Press Enter to Return to Main Menu **");
+//      scanner.nextLine();
+//    }
     }
   }
   
