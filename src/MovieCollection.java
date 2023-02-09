@@ -305,13 +305,43 @@ public class MovieCollection {
   }
 
 
-
-
-
-  
   private void listGenres() {
-    /* TASK 5: IMPLEMENT ME */
+    String temp = "";
+    for (int i = 0; i < movies.size(); i++) {
+      temp += movies.get(i).getGenres() + "|";
+    }
+    ArrayList<String> totalGenres = new ArrayList<String>(Arrays.asList(temp.split("\\|")));
+    sortString(totalGenres);
+    for (int j = 0; j < totalGenres.size(); j++) {
+      int choiceNum = j + 1;
+      System.out.println("" + choiceNum + ". " + totalGenres.get(j));
+    }
+    System.out.println("Which would you like to see all movies for?");
+    System.out.print("Enter number: ");
+    int choice = scanner.nextInt();
+    String currentGenre = totalGenres.get(choice - 1);
+    scanner.nextLine();
+    ArrayList <Movie> allMovies = new ArrayList<>();
+    for (int k = 0; k < movies.size(); k++) {
+      if (movies.get(k).getGenres().contains(currentGenre)) {
+        allMovies.add(movies.get(k));
+      }
+    }
+    sortResults(allMovies);
+    for (int l = 0; l < allMovies.size(); l++) {
+      int choiceNum = l + 1;
+      System.out.println("" + choiceNum + ". " + allMovies.get(l).getTitle());
+    }
+    System.out.println("Which movie would you like to learn more about?");
+    System.out.print("Enter number: ");
+    int num = scanner.nextInt();
+    Movie currentMovie = allMovies.get(num - 1);
+    scanner.nextLine();
+    displayMovieInfo(currentMovie);
+    System.out.println("\n ** Press Enter to Return to Main Menu **");
+    scanner.nextLine();
   }
+
   
   private void listHighestRated() {
     /* TASK 6: IMPLEMENT ME */
