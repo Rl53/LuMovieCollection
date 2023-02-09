@@ -1,10 +1,8 @@
+import javax.naming.PartialResultException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 
 public class MovieCollection {
   private ArrayList<Movie> movies;
@@ -95,7 +93,7 @@ public class MovieCollection {
 
       }
       bufferedReader.close();
-    } catch(IOException exception) {
+    } catch (IOException exception) {
       System.out.println("Unable to access " + exception.getMessage());
     }
   }
@@ -161,7 +159,8 @@ public class MovieCollection {
       listToSort.set(possibleIndex, temp);
     }
   }
-  
+
+
   private void displayMovieInfo(Movie movie) {
     System.out.println();
     System.out.println("Title: " + movie.getTitle());
@@ -241,29 +240,31 @@ public class MovieCollection {
       String movieCast = movies.get(i).getCast();
       movieCast = movieCast.toLowerCase();
 
-      if (movieCast.indexOf(name) != -1) {
+      if (movieCast.contains(name)) {
         //add the Movie object to the results list
         results.add(movies.get(i));
       }
     }
-
-    if (results.size() > 0) {
-      // sort the results by title
-      sortResults(results);
-
-      // now, display them all to the user
-      for (int i = 0; i < results.size(); i++) {
-        String temp = results.get(i).getCast();
-        String[] array = temp.split("\\|");
-        int idx = 0;
-        while (idx < array.length && !array[idx].equals(name)) {
-          idx++;
-        }
-        String fullName = array[idx];
-        // this will print index 0 as choice 1 in the results list; better for user!
-        int choiceNum = i + 1;
-        System.out.println("" + choiceNum + ". " + fullName);
+    // now, display them all to the user
+    String temp = "";
+    for (int i = 0; i < results.size(); i++) {
+      temp += results.get(i).getCast() + "|";
+    }
+    ArrayList<String> array = new ArrayList<String>(Arrays.asList(temp.split("\\|")));
+    int idx = 0;
+    ArrayList<String> searchedCast = new ArrayList<String>();
+    while (idx < array.size()) {
+      if (array.get(idx).toLowerCase().contains(name) && !searchedCast.contains(array.get(idx))) {
+        searchedCast.add(array.get(idx));
       }
+      idx++;
+    }
+    for (int j = 0; j < searchedCast.size(); j++) {
+      // this will print index 0 as choice 1 in the results list; better for user!
+      int choiceNum = j + 1;
+      System.out.println("" + choiceNum + ". " + searchedCast.get(j));
+    }
+  }
 
 //      System.out.println("Which would you like to see all movies for?");
 //      System.out.print("Enter number: ");
@@ -278,8 +279,7 @@ public class MovieCollection {
 //      System.out.println("** Press Enter to Return to Main Menu **");
 //      scanner.nextLine();
 //    }
-    }
-  }
+
   
   private void listGenres() {
     /* TASK 5: IMPLEMENT ME */
