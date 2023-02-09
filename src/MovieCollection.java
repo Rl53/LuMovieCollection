@@ -160,6 +160,10 @@ public class MovieCollection {
     }
   }
 
+  private void sortString(ArrayList<String> listToSort) {
+    Collections.sort(listToSort);
+  }
+
 
   private void displayMovieInfo(Movie movie) {
     System.out.println();
@@ -259,10 +263,15 @@ public class MovieCollection {
       }
       idx++;
     }
-    for (int j = 0; j < searchedCast.size(); j++) {
-      // this will print index 0 as choice 1 in the results list; better for user!
-      int choiceNum = j + 1;
-      System.out.println("" + choiceNum + ". " + searchedCast.get(j));
+    if (searchedCast.size() > 0) {
+      // sort the results by title
+      sortString(searchedCast);
+
+      for (int j = 0; j < searchedCast.size(); j++) {
+        // this will print index 0 as choice 1 in the results list; better for user!
+        int choiceNum = j + 1;
+        System.out.println("" + choiceNum + ". " + searchedCast.get(j));
+      }
     }
   }
 
