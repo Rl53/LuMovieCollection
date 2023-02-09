@@ -311,7 +311,17 @@ public class MovieCollection {
       temp += movies.get(i).getGenres() + "|";
     }
     ArrayList<String> totalGenres = new ArrayList<String>(Arrays.asList(temp.split("\\|")));
-    sortString(totalGenres);
+    int idx = 0;
+    ArrayList<String> removeDupes = new ArrayList<>();
+    while (idx < totalGenres.size()) {
+      if (!removeDupes.contains(totalGenres.get(idx))) {
+        removeDupes.add(totalGenres.get(idx));
+      }
+      idx++;
+    }
+    sortString(removeDupes);
+    totalGenres = removeDupes;
+
     for (int j = 0; j < totalGenres.size(); j++) {
       int choiceNum = j + 1;
       System.out.println("" + choiceNum + ". " + totalGenres.get(j));
