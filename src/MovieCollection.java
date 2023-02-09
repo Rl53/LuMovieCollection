@@ -272,22 +272,39 @@ public class MovieCollection {
         int choiceNum = j + 1;
         System.out.println("" + choiceNum + ". " + searchedCast.get(j));
       }
-      //      System.out.println("Which would you like to see all movies for?");
-//      System.out.print("Enter number: ");
-//      int choice = scanner.nextInt();
-//      scanner.nextLine();
-//      Movie selectedMovie = results.get(choice - 1);
-//      displayMovieInfo(selectedMovie);
-//      System.out.println("\n ** Press Enter to Return to Main Menu **");
-//      scanner.nextLine();
-//    } else {
-//      System.out.println("\nNo movies match that keyword term!");
-//      System.out.println("** Press Enter to Return to Main Menu **");
-//      scanner.nextLine();
-//    }
+      System.out.println("Which would you like to see all movies for?");
+      System.out.print("Enter number: ");
+      int choice = scanner.nextInt();
+      String castMember = searchedCast.get(choice - 1);
+      scanner.nextLine();
+      ArrayList <Movie> allMovies = new ArrayList<>();
+      for (int i = 0; i < movies.size(); i++) {
+        if (movies.get(i).getCast().contains(castMember)) {
+          allMovies.add(movies.get(i));
+        }
+      }
+      sortResults(allMovies);
+      for (int j = 0; j < allMovies.size(); j++) {
+        // this will print index 0 as choice 1 in the results list; better for user!
+        int choiceNum = j + 1;
+        System.out.println("" + choiceNum + ". " + allMovies.get(j).getTitle());
+      }
+      System.out.println("Which movie would you like to learn more about?");
+      System.out.print("Enter number: ");
+      int num = scanner.nextInt();
+      Movie currentMovie = allMovies.get(num - 1);
+      scanner.nextLine();
+      displayMovieInfo(currentMovie);
+      System.out.println("\n ** Press Enter to Return to Main Menu **");
+      scanner.nextLine();
+    } else {
+      System.out.println("\nNo actors with that word!");
+      System.out.println("** Press Enter to Return to Main Menu **");
+      scanner.nextLine();
     }
-
   }
+
+
 
 
 
