@@ -272,10 +272,7 @@ public class MovieCollection {
         int choiceNum = j + 1;
         System.out.println("" + choiceNum + ". " + searchedCast.get(j));
       }
-    }
-  }
-
-//      System.out.println("Which would you like to see all movies for?");
+      //      System.out.println("Which would you like to see all movies for?");
 //      System.out.print("Enter number: ");
 //      int choice = scanner.nextInt();
 //      scanner.nextLine();
@@ -288,6 +285,11 @@ public class MovieCollection {
 //      System.out.println("** Press Enter to Return to Main Menu **");
 //      scanner.nextLine();
 //    }
+    }
+
+  }
+
+
 
   
   private void listGenres() {
