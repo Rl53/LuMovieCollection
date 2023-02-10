@@ -164,6 +164,31 @@ public class MovieCollection {
     Collections.sort(listToSort);
   }
 
+  private void sortRatings(ArrayList<Movie> listToSort) {
+    for (int j = 1; j < listToSort.size(); j++) {
+      Movie temp = listToSort.get(j);
+      Double tempRating = temp.getUserRating();
+      int possibleIndex = j;
+      while (possibleIndex > 0 && tempRating > listToSort.get(possibleIndex - 1).getUserRating()) {
+        listToSort.set(possibleIndex, listToSort.get(possibleIndex - 1));
+        possibleIndex--;
+      }
+      listToSort.set(possibleIndex, temp);
+    }
+  }
+
+  private void sortRevenue(ArrayList<Movie> listToSort) {
+    for (int j = 1; j < listToSort.size(); j++) {
+      Movie temp = listToSort.get(j);
+      int tempRevenue = temp.getRevenue();
+      int possibleIndex = j;
+      while (possibleIndex > 0 && tempRevenue > listToSort.get(possibleIndex - 1).getRevenue()) {
+        listToSort.set(possibleIndex, listToSort.get(possibleIndex - 1));
+        possibleIndex--;
+      }
+      listToSort.set(possibleIndex, temp);
+    }
+  }
 
   private void displayMovieInfo(Movie movie) {
     System.out.println();
@@ -186,7 +211,7 @@ public class MovieCollection {
     searchTerm = searchTerm.toLowerCase();
 
     // arraylist to hold search results
-    ArrayList<Movie> results = new ArrayList<Movie>();
+    ArrayList<Movie> results = new ArrayList<>();
 
     // search through ALL movies in collection
     for (int i = 0; i < movies.size(); i++) {
@@ -236,7 +261,7 @@ public class MovieCollection {
     name = name.toLowerCase();
 
     // arraylist to hold search results
-    ArrayList<Movie> results = new ArrayList<Movie>();
+    ArrayList<Movie> results = new ArrayList<>();
 
 
     // search through ALL movies in collection
@@ -354,10 +379,36 @@ public class MovieCollection {
 
   
   private void listHighestRated() {
-    /* TASK 6: IMPLEMENT ME */
-  }
+    ArrayList<Movie> rated = movies;
+    sortResults(rated);
+    sortRatings(rated);
+    for (int i = 0; i < 50; i++) {
+      System.out.println( i + 1 + ". " + rated.get(i).getTitle() + ": " + rated.get(i).getUserRating());
+    }
+    System.out.println("Which movie would you like to learn more about?");
+    System.out.print("Enter number: ");
+    int num = scanner.nextInt();
+    Movie currentMovie = rated.get(num - 1);
+    scanner.nextLine();
+    displayMovieInfo(currentMovie);
+    System.out.println("\n ** Press Enter to Return to Main Menu **");
+    scanner.nextLine();
+    }
+
   
   private void listHighestRevenue() {
-    /* TASK 6: IMPLEMENT ME */
-  }
+    ArrayList<Movie> revenue = movies;
+    sortResults(revenue);
+    sortRevenue(revenue);
+    for (int i = 0; i < 50; i++) {
+      System.out.println( i + 1 + ". " + revenue.get(i).getTitle() + ": " + revenue.get(i).getRevenue());
+    }
+    System.out.println("Which movie would you like to learn more about?");
+    System.out.print("Enter number: ");
+    int num = scanner.nextInt();
+    Movie currentMovie = revenue.get(num - 1);
+    scanner.nextLine();
+    displayMovieInfo(currentMovie);
+    System.out.println("\n ** Press Enter to Return to Main Menu **");
+    scanner.nextLine();  }
 }
